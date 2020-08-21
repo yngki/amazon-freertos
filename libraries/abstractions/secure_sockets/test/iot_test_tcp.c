@@ -3270,23 +3270,23 @@ TEST( Full_TCP_Extended, SOCKETS_dns_multiple_addresses )
     uint32_t ulIPAddress;
     uint32_t ulUnique;
     uint32_t ulNumUniqueIPAddresses = 0;
-
-    /* Resolve the AWS IoT Core endpoint, which will have multiple IP addresses */
-
     uint32_t ulIPAddresses[ dnstestNUM_UNIQUE_IP_ADDRESSES ] = { 0UL };
 
-    tcptestPRINTF( ( "Starting %s.\r\n", __FUNCTION__ ) );
+    configPRINTF( ( "Starting %s.\r\n", __FUNCTION__ ) );
 
     /*
      * Resolve the endpoint to an array of IP addresses. Each subsequent
      * call will return one of the addresses which the name resolves to.
      *
      * NOTE: Resolving addresses can take some time, so allow up to
-     *   60 seconds to collect all of them.
+     *       60 seconds to collect all of them.
      */
     for( i = 0; ( i < 60 ) && ( ulNumUniqueIPAddresses < dnstestNUM_UNIQUE_IP_ADDRESSES ); i++ )
     {
+        /* Resolve the AWS IoT Core endpoint, which will have multiple IP addresses */
         ulIPAddress = SOCKETS_GetHostByName( clientcredentialMQTT_BROKER_ENDPOINT );
+
+        configPRINTF( ( "Resolved Address [%d]: %d", i, ulIPAddress ) );
 
         for( j = 0, ulUnique = 1; j < ulNumUniqueIPAddresses; j++ )
         {
@@ -3301,13 +3301,16 @@ TEST( Full_TCP_Extended, SOCKETS_dns_multiple_addresses )
             ulIPAddresses[ ulNumUniqueIPAddresses++ ] = ulIPAddress;
         }
 
-        vTaskDelay( 1000 / portTICK_PERIOD_MS );
+        vTaskDelay( pdMS_TO_TICKS( 1000 ) );
     }
 
     configPRINTF( ( "%s: identified %d different IP addresses for %s.\r\n",
                     __FUNCTION__,
                     ulNumUniqueIPAddresses,
                     clientcredentialMQTT_BROKER_ENDPOINT ) );
+
+    /* Opportunity to flush out print buffers. */
+    vTaskDelay( pdMS_TO_TICKS( 1000 ) );
 
     /* Require a minimum number of IP addresses for AWS IoT Core endpoints */
     if( ulNumUniqueIPAddresses >= dnstestNUM_UNIQUE_IP_ADDRESSES )
