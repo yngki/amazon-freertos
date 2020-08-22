@@ -3286,7 +3286,7 @@ TEST( Full_TCP_Extended, SOCKETS_dns_multiple_addresses )
         /* Resolve the AWS IoT Core endpoint, which will have multiple IP addresses */
         ulIPAddress = SOCKETS_GetHostByName( clientcredentialMQTT_BROKER_ENDPOINT );
 
-        configPRINTF( ( "Resolved Address [%d]: %d", i, ulIPAddress ) );
+        configPRINTF( ( "Resolved Address [%d]: %ul\r\n", i, ulIPAddress ) );
 
         for( j = 0, ulUnique = 1; j < ulNumUniqueIPAddresses; j++ )
         {
@@ -3304,13 +3304,12 @@ TEST( Full_TCP_Extended, SOCKETS_dns_multiple_addresses )
         vTaskDelay( pdMS_TO_TICKS( 1000 ) );
     }
 
-    configPRINTF( ( "%s: identified %d different IP addresses for %s.\r\n",
-                    __FUNCTION__,
+    configPRINTF( ( "Identified %d different IP addresses for %s.\r\n",
                     ulNumUniqueIPAddresses,
                     clientcredentialMQTT_BROKER_ENDPOINT ) );
 
     /* Opportunity to flush out print buffers. */
-    vTaskDelay( pdMS_TO_TICKS( 1000 ) );
+    vTaskDelay( pdMS_TO_TICKS( 2000 ) );
 
     /* Require a minimum number of IP addresses for AWS IoT Core endpoints */
     if( ulNumUniqueIPAddresses >= dnstestNUM_UNIQUE_IP_ADDRESSES )
