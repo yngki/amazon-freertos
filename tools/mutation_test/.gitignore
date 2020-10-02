@@ -1,4 +1,5 @@
 # ignore all logs
+/csvs
 *.csv
 # ignore all jobfiles
 *jobfile
@@ -7,3 +8,5 @@ jobfile
 .DS_Store
 # ignore env
 /env
+# ignore large line coverage map
+#wifi_line_coverage.json
