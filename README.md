@@ -1,5 +1,8 @@
 # FreeRTOS AWS Reference Integrations
 
+## Update
+In the next few months, we will have an official release of the AWS Reference Integration repository which brings in the 202012.01-LTS libraries. In this release, we will only carry the LTS libraries going forward in main.  The legacy/non-LTS libraries will continue to be accessible through the release tags, and AWS will continue to support Github issues on these libraries on a case by case basis.  
+
 ## Cloning
 This repo uses [Git Submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules) to bring in dependent components.
 
