@@ -1,5 +1,15 @@
 # FreeRTOS AWS Reference Integrations
 
+## Table of Contents
+* [Overview](#overview)
+    * [License](#license)
+* [Versioning](#versioning)
+* [Releases](#releases)
+    * [202007.00](#20200700)
+    * [202012.00](#20201200)
+* [Getting Started](#releases)
+* [FreeRTOS Qualified Reference Integrations](#servicequalified)
+
 ## Cloning
 This repo uses [Git Submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules) to bring in dependent components.
 
